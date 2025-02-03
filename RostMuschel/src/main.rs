@@ -52,12 +52,12 @@ fn handle_command(command: &str, parameters: &[&str]) {
                 Err(_) => {
                     println!("{}: must provide a number", command);
                     return;
-                },
+                }
             };
 
             // Now exit with provided exit value.
             std::process::exit(exit_value)
-        },
+        }
         _ => println!("{}: command not found", command),
     }
 }
