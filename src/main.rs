@@ -3,12 +3,12 @@ use std::io::Write;
 use std::str::SplitWhitespace;
 
 // The character that is printed on every new line.
-const SHELL_CHAR: char = '>';
+const SHELL_PROMPT: char = '>';
 
 fn main() {
     loop {
         // Prints the shell character and a whitespace.
-        print!("{} ", SHELL_CHAR);
+        print!("{} ", SHELL_PROMPT);
         flush_stdout();
 
         // Get user input.
@@ -58,6 +58,7 @@ fn handle_command(command: &str, parameters: &[&str]) {
             // Now exit with provided exit value.
             std::process::exit(exit_value)
         }
+        "echo" => println!("{}", parameters.join(" ")),
         _ => println!("{}: command not found", command),
     }
 }
