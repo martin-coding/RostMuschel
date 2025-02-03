@@ -18,7 +18,7 @@ fn main() {
             .expect("Failed to read line.");
 
         // Split the input into a command and parameters.
-        let mut split: SplitWhitespace = input.trim().split_whitespace();
+        let mut split: SplitWhitespace = input.split_whitespace();
         let command: &str = split.next().unwrap_or_default();
         let parameters: Vec<&str> = split.collect();
 
@@ -38,7 +38,7 @@ fn handle_command(command: &str, parameters: &[&str]) {
     match command {
         "exit" => {
             // Check if correct number of parameters provided.
-            if parameters.len() == 0 {
+            if parameters.is_empty() {
                 println!("{}: no parameter provided", command);
                 return;
             } else if parameters.len() > 1 {
