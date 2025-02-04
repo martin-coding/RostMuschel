@@ -16,14 +16,28 @@ fn main() {
             .read_line(&mut input)
             .expect("Failed to read line.");
 
+        let call = Call::from_input(&input);
+
+        // Handle functionality and output.
+        handle_command(&call);
+        flush_stdout();
+    }
+}
+
+/// Represent a command call with arguments.
+struct Call<'a> {
+    command: &'a str,
+    arguments: Vec<&'a str>,
+}
+
+impl<'a> Call<'a> {
+    /// Turns an input string into a command call.
+    fn from_input(input: &'a str) -> Self {
         // Split the input into a command and arguments.
         let mut split: SplitWhitespace = input.split_whitespace();
         let command: &str = split.next().unwrap_or_default();
         let arguments: Vec<&str> = split.collect();
-
-        // Handle functionality and output.
-        handle_command(command, arguments.as_slice());
-        flush_stdout();
+        Call { command, arguments }
     }
 }
 
@@ -33,23 +47,23 @@ fn flush_stdout() {
 }
 
 /// Handles command logic and output.
-fn handle_command(command: &str, arguments: &[&str]) {
-    match command {
+fn handle_command(call: &Call) {
+    match call.command {
         "exit" => {
             // Check if correct number of arguments provided.
-            if arguments.is_empty() {
+            if call.arguments.is_empty() {
                 // Always exit without error value if no argument provided.
                 std::process::exit(0)
-            } else if arguments.len() > 1 {
-                println!("{}: too many arguments provided", command);
+            } else if call.arguments.len() > 1 {
+                println!("{}: too many arguments provided", call.command);
                 return;
             }
 
             // Parse the argument to an integer.
-            let exit_value: i32 = match arguments[0].parse() {
+            let exit_value: i32 = match call.arguments[0].parse() {
                 Ok(num) => num,
                 Err(_) => {
-                    println!("{}: must provide a number", command);
+                    println!("{}: must provide a number", call.command);
                     return;
                 }
             };
@@ -57,7 +71,7 @@ fn handle_command(command: &str, arguments: &[&str]) {
             // Now exit with provided exit value.
             std::process::exit(exit_value)
         }
-        "echo" => println!("{}", arguments.join(" ")),
-        _ => println!("{}: command not found", command),
+        "echo" => println!("{}", call.arguments.join(" ")),
+        _ => println!("{}: command not found", call.command),
     }
 }
