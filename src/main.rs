@@ -37,8 +37,9 @@ fn flush_stdout() {
 /// Handles command logic and output.
 fn handle_command(call: &Call) {
     match call.command {
-        "exit" => exit::call(call),
+        "cd" => cd::call(call),
         "echo" => echo::call(call),
+        "exit" => exit::call(call),
         "pwd" => pwd::call(call),
         _ => unknown::call(call),
     }
