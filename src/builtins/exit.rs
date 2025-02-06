@@ -6,7 +6,7 @@ use crate::call::Call;
 pub fn call(call: &Call) {
     // Check if correct number of arguments provided.
     if call.arguments.is_empty() {
-        // Always exit without error value if no argument provided.
+        // Always exit without error value if no arguments provided.
         std::process::exit(0)
     } else if call.arguments.len() > 1 {
         println!("{}: too many arguments provided", call.command);
