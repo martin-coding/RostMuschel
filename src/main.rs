@@ -41,6 +41,7 @@ fn handle_command(call: &Call) {
         "echo" => echo::call(call),
         "exit" => exit::call(call),
         "pwd" => pwd::call(call),
+        "type" => type_builtin::call(call),
         _ => unknown::call(call),
     }
 }
