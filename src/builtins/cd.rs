@@ -1,7 +1,7 @@
-use crate::call::Call;
-
 use std::env;
 use std::path::Path;
+
+use crate::call::Call;
 
 /// Change working directory.
 /// If no argument is provided, go to home.
