@@ -1,6 +1,6 @@
-use crate::call::Call;
-
 use std::env;
+
+use crate::call::Call;
 
 /// Prints the current working directory.
 pub fn call(_call: &Call) {

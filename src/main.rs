@@ -1,10 +1,10 @@
 mod builtins;
 mod call;
 
+use std::io::{self, Write};
+
 use crate::builtins::*;
 use crate::call::Call;
-
-use std::io::{self, Write};
 
 // The character that is printed on every new line.
 const SHELL_PROMPT: char = '>';
